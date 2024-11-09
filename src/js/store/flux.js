@@ -3,7 +3,7 @@ const getState = ({ getStore, setStore }) => ({
     characters: [],
     planets: [],
     starships: [],
-    favorites: JSON.parse(localStorage.getItem("favorites")),
+    favorites: JSON.parse(localStorage.getItem("favorites")) || [],
   },
   actions: {
     fetchData: async () => {

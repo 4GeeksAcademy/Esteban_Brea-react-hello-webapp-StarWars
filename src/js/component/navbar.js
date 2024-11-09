@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+  const favoritesCounter = store.favorites ? store.favorites.length : 0;
+
   return (
     <nav className="navbar">
       <Link to="/">
@@ -25,16 +27,16 @@ export const Navbar = () => {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Favorites {store.favorites.length}
+          Favorites {favoritesCounter}
         </button>
         <ul
           className="dropdown-menu dropdown-menu-end favorites-dropdown"
           aria-labelledby="favoritesDropdown"
         >
-          {store.favorites.length === 0 ? (
+          {store.favorites && store.favorites.length === 0 ? (
             <li className="dropdown-item">Empty</li>
           ) : (
-            store.favorites.map((item, index) => (
+            store.favorites?.map((item, index) => (
               <li
                 key={index}
                 className="dropdown-item d-flex justify-content-between align-items-center"
